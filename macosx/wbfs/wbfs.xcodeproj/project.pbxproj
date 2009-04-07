@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3DBBF7A60F89071A00592CB6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */; };
+		3DBBF7DC0F8907E000592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
+		3DBBF7DD0F8907E000592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
+		3DBBF7DE0F8907E000592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
+		3DBBF7DF0F8907E000592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
+		3DBBF7E00F8907E000592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
+		3DBBF7E20F8907E000592CB6 /* disc_usage_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */; };
+		3DBBF7E30F8907E000592CB6 /* ec.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D50F8907E000592CB6 /* ec.c */; };
+		3DBBF7E50F8907E000592CB6 /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D80F8907E000592CB6 /* tools.c */; };
+		3DBBF7E60F8907E000592CB6 /* bn.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D90F8907E000592CB6 /* bn.c */; };
+		3DBBF7E70F8907E000592CB6 /* wbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7DB0F8907E000592CB6 /* wbfs.c */; };
+		3DBBF8180F8908DB00592CB6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */; };
+		3DBBF81D0F89092600592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
+		3DBBF81F0F89092600592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
+		3DBBF8200F89092600592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
+		3DBBF8210F89092600592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
+		3DBBF8220F89092600592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
+		3DBBF8240F89092600592CB6 /* disc_usage_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */; };
+		3DBBF8250F89092600592CB6 /* ec.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D50F8907E000592CB6 /* ec.c */; };
+		3DBBF8260F89092600592CB6 /* negentig.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D70F8907E000592CB6 /* negentig.c */; };
+		3DBBF8270F89092600592CB6 /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D80F8907E000592CB6 /* tools.c */; };
+		3DBBF8280F89092600592CB6 /* bn.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D90F8907E000592CB6 /* bn.c */; };
+		3DBBF8330F89096E00592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
+		3DBBF8340F89096E00592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
+		3DBBF8350F89096E00592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
+		3DBBF8360F89096E00592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
+		3DBBF8370F89096E00592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
+		3DBBF8380F89096E00592CB6 /* scrub.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D30F8907E000592CB6 /* scrub.c */; };
+		3DBBF8390F89096E00592CB6 /* disc_usage_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */; };
+		3DBBF83A0F89096E00592CB6 /* ec.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D50F8907E000592CB6 /* ec.c */; };
+		3DBBF83B0F89096E00592CB6 /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D80F8907E000592CB6 /* tools.c */; };
+		3DBBF83C0F89096E00592CB6 /* bn.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D90F8907E000592CB6 /* bn.c */; };
+		3DBBF83D0F89097C00592CB6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76FAF0486AB0100D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3D1916EC0F8B878100E97958 /* libwbfs_win32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_win32.c; sourceTree = "<group>"; };
+		3D1917220F8B99B100E97958 /* libwbfs_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libwbfs_os.h; path = ../../libwbfs_os.h; sourceTree = SOURCE_ROOT; };
+		3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		3DBBF7CC0F8907E000592CB6 /* libwbfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs.c; sourceTree = "<group>"; };
+		3DBBF7CD0F8907E000592CB6 /* libwbfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwbfs.h; sourceTree = "<group>"; };
+		3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_linux.c; sourceTree = "<group>"; };
+		3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_macosx.c; sourceTree = "<group>"; };
+		3DBBF7D00F8907E000592CB6 /* rijndael.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rijndael.c; sourceTree = "<group>"; };
+		3DBBF7D10F8907E000592CB6 /* wiidisc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiidisc.c; sourceTree = "<group>"; };
+		3DBBF7D20F8907E000592CB6 /* wiidisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wiidisc.h; sourceTree = "<group>"; };
+		3DBBF7D30F8907E000592CB6 /* scrub.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = scrub.c; path = ../../scrub.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = disc_usage_table.c; path = ../../disc_usage_table.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7D50F8907E000592CB6 /* ec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ec.c; path = ../../ec.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7D70F8907E000592CB6 /* negentig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = negentig.c; path = ../../negentig.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7D80F8907E000592CB6 /* tools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tools.c; path = ../../tools.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7D90F8907E000592CB6 /* bn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bn.c; path = ../../bn.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7DA0F8907E000592CB6 /* tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tools.h; path = ../../tools.h; sourceTree = SOURCE_ROOT; };
+		3DBBF7DB0F8907E000592CB6 /* wbfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wbfs.c; path = ../../wbfs.c; sourceTree = SOURCE_ROOT; };
+		3DBBF7F30F89082100592CB6 /* negentig */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = negentig; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DBBF82F0F89095600592CB6 /* scrub */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = scrub; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FB20486AB0100D96B5E /* wbfs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = wbfs; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6A0FF2C0290799A04C91782 /* wbfs.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = wbfs.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DBBF7F10F89082100592CB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF8180F8908DB00592CB6 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DBBF82D0F89095600592CB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF83D0F89097C00592CB6 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD76FAD0486AB0100D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF7A60F89071A00592CB6 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* wbfs */ = {
+			isa = PBXGroup;
+			children = (
+				3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */,
+				3DBBF7B80F89077400592CB6 /* Source */,
+				C6A0FF2B0290797F04C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = wbfs;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76FB20486AB0100D96B5E /* wbfs */,
+				3DBBF7F30F89082100592CB6 /* negentig */,
+				3DBBF82F0F89095600592CB6 /* scrub */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3DBBF7B80F89077400592CB6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3DBBF7DB0F8907E000592CB6 /* wbfs.c */,
+				3DBBF7D70F8907E000592CB6 /* negentig.c */,
+				3DBBF7D30F8907E000592CB6 /* scrub.c */,
+				3D1917220F8B99B100E97958 /* libwbfs_os.h */,
+				3DBBF7CB0F8907E000592CB6 /* libwbfs */,
+				3DBBF7D90F8907E000592CB6 /* bn.c */,
+				3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */,
+				3DBBF7D50F8907E000592CB6 /* ec.c */,
+				3DBBF7DA0F8907E000592CB6 /* tools.h */,
+				3DBBF7D80F8907E000592CB6 /* tools.c */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		3DBBF7CB0F8907E000592CB6 /* libwbfs */ = {
+			isa = PBXGroup;
+			children = (
+				3DBBF7CC0F8907E000592CB6 /* libwbfs.c */,
+				3DBBF7CD0F8907E000592CB6 /* libwbfs.h */,
+				3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */,
+				3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */,
+				3D1916EC0F8B878100E97958 /* libwbfs_win32.c */,
+				3DBBF7D00F8907E000592CB6 /* rijndael.c */,
+				3DBBF7D10F8907E000592CB6 /* wiidisc.c */,
+				3DBBF7D20F8907E000592CB6 /* wiidisc.h */,
+			);
+			name = libwbfs;
+			path = ../../libwbfs;
+			sourceTree = SOURCE_ROOT;
+		};
+		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6A0FF2C0290799A04C91782 /* wbfs.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DBBF7F20F89082100592CB6 /* negentig */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DBBF8050F89086000592CB6 /* Build configuration list for PBXNativeTarget "negentig" */;
+			buildPhases = (
+				3DBBF7F00F89082100592CB6 /* Sources */,
+				3DBBF7F10F89082100592CB6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = negentig;
+			productName = negentig;
+			productReference = 3DBBF7F30F89082100592CB6 /* negentig */;
+			productType = "com.apple.product-type.tool";
+		};
+		3DBBF82E0F89095600592CB6 /* scrub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DBBF8580F89099700592CB6 /* Build configuration list for PBXNativeTarget "scrub" */;
+			buildPhases = (
+				3DBBF82C0F89095600592CB6 /* Sources */,
+				3DBBF82D0F89095600592CB6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = scrub;
+			productName = scrub;
+			productReference = 3DBBF82F0F89095600592CB6 /* scrub */;
+			productType = "com.apple.product-type.tool";
+		};
+		8DD76FA90486AB0100D96B5E /* wbfs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "wbfs" */;
+			buildPhases = (
+				8DD76FAB0486AB0100D96B5E /* Sources */,
+				8DD76FAD0486AB0100D96B5E /* Frameworks */,
+				8DD76FAF0486AB0100D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wbfs;
+			productInstallPath = "$(HOME)/bin";
+			productName = wbfs;
+			productReference = 8DD76FB20486AB0100D96B5E /* wbfs */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "wbfs" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* wbfs */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76FA90486AB0100D96B5E /* wbfs */,
+				3DBBF7F20F89082100592CB6 /* negentig */,
+				3DBBF82E0F89095600592CB6 /* scrub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DBBF7F00F89082100592CB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF81D0F89092600592CB6 /* libwbfs.c in Sources */,
+				3DBBF81F0F89092600592CB6 /* libwbfs_linux.c in Sources */,
+				3DBBF8200F89092600592CB6 /* libwbfs_macosx.c in Sources */,
+				3DBBF8210F89092600592CB6 /* rijndael.c in Sources */,
+				3DBBF8220F89092600592CB6 /* wiidisc.c in Sources */,
+				3DBBF8240F89092600592CB6 /* disc_usage_table.c in Sources */,
+				3DBBF8250F89092600592CB6 /* ec.c in Sources */,
+				3DBBF8260F89092600592CB6 /* negentig.c in Sources */,
+				3DBBF8270F89092600592CB6 /* tools.c in Sources */,
+				3DBBF8280F89092600592CB6 /* bn.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DBBF82C0F89095600592CB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF8330F89096E00592CB6 /* libwbfs.c in Sources */,
+				3DBBF8340F89096E00592CB6 /* libwbfs_linux.c in Sources */,
+				3DBBF8350F89096E00592CB6 /* libwbfs_macosx.c in Sources */,
+				3DBBF8360F89096E00592CB6 /* rijndael.c in Sources */,
+				3DBBF8370F89096E00592CB6 /* wiidisc.c in Sources */,
+				3DBBF8380F89096E00592CB6 /* scrub.c in Sources */,
+				3DBBF8390F89096E00592CB6 /* disc_usage_table.c in Sources */,
+				3DBBF83A0F89096E00592CB6 /* ec.c in Sources */,
+				3DBBF83B0F89096E00592CB6 /* tools.c in Sources */,
+				3DBBF83C0F89096E00592CB6 /* bn.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD76FAB0486AB0100D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBBF7E70F8907E000592CB6 /* wbfs.c in Sources */,
+				3DBBF7DC0F8907E000592CB6 /* libwbfs.c in Sources */,
+				3DBBF7DD0F8907E000592CB6 /* libwbfs_linux.c in Sources */,
+				3DBBF7DE0F8907E000592CB6 /* libwbfs_macosx.c in Sources */,
+				3DBBF7DF0F8907E000592CB6 /* rijndael.c in Sources */,
+				3DBBF7E00F8907E000592CB6 /* wiidisc.c in Sources */,
+				3DBBF7E20F8907E000592CB6 /* disc_usage_table.c in Sources */,
+				3DBBF7E30F8907E000592CB6 /* ec.c in Sources */,
+				3DBBF7E50F8907E000592CB6 /* tools.c in Sources */,
+				3DBBF7E60F8907E000592CB6 /* bn.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB928608733DD80010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_UI_STUFF,
+					ENABLE_RENAME,
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = wbfs;
+			};
+			name = Debug;
+		};
+		1DEB928708733DD80010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_UI_STUFF,
+					ENABLE_RENAME,
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = wbfs;
+			};
+			name = Release;
+		};
+		1DEB928A08733DD80010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.4;
+			};
+			name = Debug;
+		};
+		1DEB928B08733DD80010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.4;
+			};
+			name = Release;
+		};
+		3DBBF7F50F89082400592CB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = negentig;
+			};
+			name = Debug;
+		};
+		3DBBF7F60F89082400592CB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = negentig;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		3DBBF8310F89095800592CB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = scrub;
+			};
+			name = Debug;
+		};
+		3DBBF8320F89095800592CB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = scrub;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "wbfs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB928608733DD80010E9CD /* Debug */,
+				1DEB928708733DD80010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "wbfs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB928A08733DD80010E9CD /* Debug */,
+				1DEB928B08733DD80010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DBBF8050F89086000592CB6 /* Build configuration list for PBXNativeTarget "negentig" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DBBF7F50F89082400592CB6 /* Debug */,
+				3DBBF7F60F89082400592CB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DBBF8580F89099700592CB6 /* Build configuration list for PBXNativeTarget "scrub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DBBF8310F89095800592CB6 /* Debug */,
+				3DBBF8320F89095800592CB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
