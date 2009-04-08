@@ -16,7 +16,7 @@
 
 
 static int wbfs_read_sector(void *_fp, u32 lba, u32 count, void *buf) {
-	int file_des = *((int *)_fp);
+	int file_des = fileno((FILE *)_fp);
 	u64 off = lba;
 	off *= 512ULL;
 	size_t size = count * 512ULL;
@@ -38,7 +38,7 @@ static int wbfs_read_sector(void *_fp, u32 lba, u32 count, void *buf) {
 }
 
 static int wbfs_write_sector(void *_fp, u32 lba, u32 count, void *buf) {
-	int file_des = *((int *)_fp);
+	int file_des = fileno((FILE *)_fp);
 	u64 off = lba;
 	off *= 512ULL;
 	size_t size = count * 512ULL;
@@ -98,34 +98,32 @@ static int get_capacity(char *file, u32 *sector_size, u32 *n_sector) {
 }
 
 wbfs_t * wbfs_try_open_hd(char *fn, int reset) {
-	int *file_des_p = wbfs_malloc(sizeof(int));
 	u32 sector_size, n_sector;
 
 	if (!get_capacity(fn, &sector_size, &n_sector))
 		return NULL;
 
-	*file_des_p = open(fn, O_RDWR);
+	FILE *f = fopen(fn, "r+");
 
-	if (*file_des_p == 0)
+	if (!f)
 		return NULL;
 
-	return wbfs_open_hd(wbfs_read_sector, wbfs_write_sector, file_des_p,
+	return wbfs_open_hd(wbfs_read_sector, wbfs_write_sector, f,
 						sector_size , n_sector, reset);
 }
 
 wbfs_t * wbfs_try_open_partition(char *fn, int reset) {
-	int *file_des_p = wbfs_malloc(sizeof(int));
 	u32 sector_size, n_sector;
 
 	if (!get_capacity(fn, &sector_size, &n_sector))
 		return NULL;
 
-	*file_des_p = open(fn, O_RDWR);
+	FILE *f = fopen(fn, "r+");
 
-	if (*file_des_p == 0)
+	if (!f)
 		return NULL;
 
-	return wbfs_open_partition(wbfs_read_sector, wbfs_write_sector, file_des_p,
+	return wbfs_open_partition(wbfs_read_sector, wbfs_write_sector, f,
 							   sector_size , n_sector, 0, reset);
 }
 

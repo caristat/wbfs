@@ -233,8 +233,15 @@ u32 wbfs_estimate_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc, void 
 /*! remove a wiidvd inside a partition */
 u32 wbfs_rm_disc(wbfs_t*p, u8* discid);
 
+#ifdef ENABLE_RENAME
 /*! rename a wiidvd inside a partition */	   
 u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname);	   
+#endif
+
+#ifdef ENABLE_CHANGE_DISKID
+/*! edit a wiidvd diskid */
+u32 wbfs_nid_disc(wbfs_t*p, u8* discid, u8* newid);
+#endif
 
 /*! trim the file-system to its minimum size
   This allows to use wbfs as a wiidisc container

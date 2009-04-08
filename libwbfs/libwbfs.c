@@ -651,6 +651,31 @@ u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname)
 }
 #endif
 
+#ifdef ENABLE_CHANGE_DISKID
+u32 wbfs_nid_disc(wbfs_t*p, u8* discid, u8* newid)
+{
+	wbfs_disc_t *d = wbfs_open_disc(p, discid);
+	int disc_info_sz_lba = p->disc_info_sz>>p->hd_sec_sz_s;
+	
+	if(!d)
+		return 1;
+	
+	if(strlen((const char *)newid) > 0x6) 
+		return 1;
+	
+	strcpy((char *)(d->header->disc_header_copy+0x0), (const char *)newid);
+	
+	p->write_hdsector(p->callback_data,
+					  p->part_lba+1+d->i*disc_info_sz_lba,
+					  disc_info_sz_lba,
+					  d->header);
+	
+	wbfs_close_disc(d);
+	wbfs_sync(p);
+	return 0;
+}	
+#endif
+	
 #ifdef WIN32
 // Could this be useful for other platforms? - g3power
 u32 wbfs_estimate_disc
@@ -760,9 +785,7 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector,v
 {
 	wbfs_t *p = d->p;
 	u8* copy_buffer = 0;
-#ifdef WIN32
 	int tot = 0, cur = 0;
-#endif
 	int i;
 	int src_wbs_nlb=p->wbfs_sec_sz/p->hd_sec_sz;
 	int dst_wbs_nlb=p->wbfs_sec_sz/p->wii_sec_sz;
@@ -770,8 +793,6 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector,v
 	if(!copy_buffer)
 			ERROR("alloc memory");
 
-#ifdef WIN32
-	// Test for other plattforms - g3power
 	if (spinner)
 	{
 		// count total number to write for spinner
@@ -785,24 +806,16 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector,v
 			}
 		}
 	}
-#endif
 
-	for( i=0; i< p->n_wbfs_sec_per_disc; i++)
+	for ( i=0; i< p->n_wbfs_sec_per_disc; i++)
 	{
 		u32 iwlba = wbfs_ntohs(d->header->wlba_table[i]);
 		if (iwlba)
 		{
-#ifdef WIN32
 			cur++;
-#endif
-			if (spinner) 
-			{
-#ifdef WIN32
+			if (spinner)
 				spinner(cur,tot);
-#else
-				spinner(i,p->n_wbfs_sec_per_disc);
-#endif
-			}
+			
 			p->read_hdsector(p->callback_data, p->part_lba + iwlba*src_wbs_nlb, src_wbs_nlb, copy_buffer);
 			write_dst_wii_sector(callback_data, i*dst_wbs_nlb, dst_wbs_nlb, copy_buffer);
 		}
@@ -812,4 +825,5 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector,v
 error:
 	return 1;
 }
-u32 wbfs_extract_file(wbfs_disc_t*d, char *path);
+	
+u32 wbfs_extract_file(wbfs_disc_t* d, char *path);

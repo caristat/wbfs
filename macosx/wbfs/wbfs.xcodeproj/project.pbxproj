@@ -308,6 +308,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MAC_UI_STUFF,
 					ENABLE_RENAME,
+					ENABLE_CHANGE_DISKID,
 				);
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = wbfs;
@@ -323,6 +324,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MAC_UI_STUFF,
 					ENABLE_RENAME,
+					ENABLE_CHANGE_DISKID,
 				);
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = wbfs;

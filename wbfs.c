@@ -34,7 +34,19 @@
 #define snprintf _snprintf
 #endif
 
-wbfs_t *wbfs_try_open(char *disc, char *partition, int reset);
+#ifdef ENABLE_RENAME
+#ifndef ENABLE_RENAME_OR_CHANGE_DISKID
+#define ENABLE_RENAME_OR_CHANGE_DISKID
+#endif
+#endif	
+#ifdef ENABLE_CHANGE_DISKID
+#ifndef ENABLE_RENAME_OR_CHANGE_DISKID
+#define ENABLE_RENAME_OR_CHANGE_DISKID
+#endif
+#endif	
+
+
+wbfs_t *wbfs_try_open(char *disk, char *partition, int reset);
 wbfs_t *wbfs_try_open_partition(char *fn, int reset);
 
 #define GB (1024 * 1024 * 1024.)
@@ -304,7 +316,7 @@ int wbfs_applet_mkhbc(wbfs_t *p)
 			fprintf(xml,"<long_description>This launches the yal wbfs game loader by Kwiirk for discid %s</long_description>\n", dirname);
 
 #else
-#ifndef MAC_UI_STUFF
+#ifdef MAC_UI_STUFF
 			fprintf(xml,"<long_description>Click the Load Button to play %s from your USB Drive</long_description>\n", b+0x20);
 #else
 			fprintf(xml,"<long_description>This launches the yal wbfs game loader by Kwiirk for discid %s</long_description>\n",filename);
@@ -513,15 +525,15 @@ void wbfs_applet_extract(wbfs_t *p, BOOL shortcmd, int argc, char *argv[])
 }
 
 #else
-int wbfs_applet_extract(wbfs_t *p,char *argv)
+int wbfs_applet_extract(wbfs_t *p, char *argv)
 {
         wbfs_disc_t *d;
         int ret = 1;
         d = wbfs_open_disc(p,(u8*)argv);
-        if(d)
+        if (d)
         {
                 char buf[0x100];
-                int i,len;
+                int i, len;
                 /* get the name of the title to find out the name of the iso */
                 strncpy(buf,(char*)d->header->disc_header_copy+0x20,0x100);
                 len = strlen(buf);
@@ -531,30 +543,28 @@ int wbfs_applet_extract(wbfs_t *p,char *argv)
                                 buf[i] = '_';
                 strncpy(buf+len,".iso",0x100-len);
                 FILE *f=fopen(buf,"w");
-                if(!f)
-                        wbfs_fatal("unable to open dest file");
-                else{
-                        fprintf(stderr,"writing to %s\n",buf);
+			if (!f) {
+				wbfs_fatal("unable to open dest file");
+            }    
+			else {
+				fprintf(stderr,"writing to %s\n",buf);
 
-                        // write a zero at the end of the iso to ensure the correct size
-                        // XXX should check if the game is DVD9..
-                        fseeko(f,(d->p->n_wii_sec_per_disc/2)*0x8000ULL-1ULL,SEEK_SET);
-                        fwrite("",1,1,f);
+				// write a zero at the end of the iso to ensure the correct size
+				// XXX should check if the game is DVD9..
+				fseeko(f,(d->p->n_wii_sec_per_disc/2)*0x8000ULL-1ULL,SEEK_SET);
+				fwrite("",1,1,f);
 
-                        ret = wbfs_extract_disc(d,write_wii_sector_file,f,_spinner);
-#ifdef __APPLE__
-					close(*((int *)f));
-					free(((int *)f));
-					f = NULL;
-#else
-					fclose(f);
-#endif
-                }
-                wbfs_close_disc(d);
+				ret = wbfs_extract_disc(d,write_wii_sector_file,f,_spinner);
+
+				fclose(f);
+			}
+
+			wbfs_close_disc(d);
                 
         }
-        else
-                fprintf(stderr,"%s not in disc in disc..\n",argv);
+        else {
+                fprintf(stderr, "%s not in disc in disc..\n", argv);
+		}
         return ret;
 }
 
@@ -579,20 +589,18 @@ void wbfs_applet_rename(wbfs_t *p, BOOL shortcmd, int argc, char *argv[])
 }
 
 #else
+
+#ifdef ENABLE_RENAME
 int wbfs_applet_ren(wbfs_t *p,char *arg1, char *arg2)
 {
-	//printf("in ren\n");
-	
-	//printf("OK\n");
 	if(wbfs_ren_disc(p,(u8*)arg1,(u8*)arg2))
 	{
 		wbfs_error("error");
 	}
 	
-	//printf("Done.\n");
-	
 	return 0;
 }
+#endif
 
 int wbfs_applet_create(char*argv)
 {
@@ -620,6 +628,18 @@ int wbfs_applet_create(char*argv)
 
 #endif
 
+#ifdef ENABLE_CHANGE_DISKID
+int wbfs_applet_nid(wbfs_t *p,char *arg1, char *arg2)
+{	
+	if(wbfs_nid_disc(p,(u8*)arg1, (u8*)arg2))
+	{
+		wbfs_error("error");
+	}
+	
+	return 0;
+}
+#endif
+
 
 #ifdef WIN32
 struct wbfs_applets
@@ -637,7 +657,7 @@ struct wbfs_applets
 	char *opt;
 	int (*function_with_argument)(wbfs_t *p, char *argv);
 	int (*function)(wbfs_t *p);
-#ifdef ENABLE_RENAME
+#ifdef ENABLE_RENAME_OR_CHANGE_DISKID
 	int (*func_args)(wbfs_t *p, char *arg1, char *arg2);
 #endif
 } 
@@ -650,7 +670,7 @@ struct wbfs_applets
 #define APPLET_NOARG(x, y) { #x, #y, "", NULL, wbfs_applet_##x }
 
 #else
-#ifndef ENABLE_RENAME
+#ifndef ENABLE_RENAME_OR_CHANGE_DISKID
 #define APPLET(x) { #x,wbfs_applet_##x,NULL}
 #define APPLET_NOARG(x) { #x,NULL,wbfs_applet_##x}
 #else
@@ -692,6 +712,10 @@ wbfs_applets[] =
 #ifdef ENABLE_RENAME
 		APPLET_ARGS(ren),
 #endif
+#ifdef ENABLE_CHANGE_DISKID
+		APPLET_ARGS(nid),
+#endif
+
         APPLET(extract),
 };
 
@@ -705,7 +729,7 @@ void usage(char **argv)
 	int i;
 	fprintf(stderr, "\nwbfs windows port build 'delta'. Mod v1.0 by Sorg.\n\nUsage:\n");
 	
-	for (i = 0;i < num_applets; i++)
+	for (i = 0; i < num_applets; i++)
 	{
 		if(!strcmp(wbfs_applets[i].command, wbfs_applets[i].shortcmd))
 		{
@@ -722,10 +746,35 @@ void usage(char **argv)
 void usage(char **argv)
 {
         int i;
-        fprintf(stderr, "Usage: %s [-d disk|-p partition]\n",
+        fprintf(stderr, 
+        		"Usage: %s [-d disk|-p partition]\n",
                 argv[0]);
-        for (i=0;i<num_applets;i++)
+
+	for (i = 0; i < num_applets; i++)
+#ifdef ENABLE_RENAME
+			if (strcmp(wbfs_applets[i].opt, "ren") == 0) {
+				fprintf(stderr, "\t %s %s\n",wbfs_applets[i].opt, wbfs_applets[i].func_args ? "(file|id) (file|name)" : "");
+			}
+#endif	
+#ifdef ENABLE_RENAME
+#ifdef ENABLE_CHANGE_DISKID
+			else 
+#endif	
+#endif	
+#ifdef ENABLE_CHANGE_DISKID
+			if (strcmp(wbfs_applets[i].opt, "nid") == 0) {
+				fprintf(stderr, "\t %s %s\n",wbfs_applets[i].opt, wbfs_applets[i].func_args ? "(file|id) (file|id)" : "");
+			}
+#endif	
+#ifdef ENABLE_RENAME_OR_CHANGE_DISKID
+			else {
+#endif	
                 fprintf(stderr, "\t %s %s\n",wbfs_applets[i].opt,wbfs_applets[i].function_with_argument?"(file|id)":"");
+
+#ifdef ENABLE_RENAME_OR_CHANGE_DISKID
+			}
+#endif	
+
         exit(EXIT_FAILURE);
 }
 #endif
@@ -832,60 +881,59 @@ int main(int argc, char *argv[])
 #else
 int main(int argc, char *argv[])
 {
-        int  opt;
-        int i;
-        char *partition=0,*disc =0;
-        while ((opt = getopt(argc, argv, "p:d:hf")) != -1) {
-                switch (opt) {
-                case 'p':
-                        partition = optarg;
-                        break;
-                case 'd':
-                        disc = optarg;
-                        break;
-                case 'f':
-                        wbfs_set_force_mode(1);
-                        break;
-                case 'h':
-                default: /* '?' */
-					usage(argv);
-                }
-        }
-        if (optind >= argc) {
-                usage(argv);
-                exit(EXIT_FAILURE);
-        }
-        
-        if (strcmp(argv[optind],"create")==0)
-        {
-                if(optind + 1 >= argc)
-                        usage(argv);
-                else
-                        return wbfs_applet_create(argv[optind+1]);
-                
-        }
-	
-#ifdef MAC_UI_STUFF
-	printf("optint:%s\n",argv[optind]);
-#endif
+	int opt;
+	int i;
+	char *partition = NULL, *disk = NULL;
 
-	for (i=0;i<num_applets;i++)
+	while ((opt = getopt(argc, argv, "p:d:hf")) != -1) {
+			switch (opt) {
+			case 'p':
+					partition = optarg;
+					break;
+			case 'd':
+					disk = optarg;
+					break;
+			case 'f':
+					wbfs_set_force_mode(1);
+					break;
+			case 'h':
+			default: /* '?' */
+				usage(argv);
+			}
+	}
+
+	if (optind >= argc) {
+		usage(argv);
+		exit(EXIT_FAILURE);
+	}
+	
+	if ( strcmp(argv[optind], "create") == 0 )
+	{
+		if (optind+1 >= argc)
+				usage(argv);
+		else
+			return wbfs_applet_create(argv[optind+1]);			
+	}
+
+	int command_found = 0;
+	
+	for (i = 0; i < num_applets; i++)
 	{
 		struct wbfs_applets *ap = &wbfs_applets[i];
-		if (strcmp(argv[optind],ap->opt)==0)
+		if ( strcmp( argv[optind], ap->opt) == 0 )
 		{
-			wbfs_t *p = wbfs_try_open(disc,partition,
+			command_found = 1;
+			wbfs_t *p = wbfs_try_open(disk, partition,
 									  ap->function== wbfs_applet_init);
 			if(!p)
 					break;
-#ifdef ENABLE_RENAME
-			if (strcmp(argv[optind],"ren")==0){
-				printf("dummy\n");
-				ap->func_args(p,argv[optind+1],argv[optind+2]);
+#ifdef ENABLE_RENAME_OR_CHANGE_DISKID
+			if ( (strcmp(argv[optind], "ren") == 0) || (strcmp(argv[optind], "nid") == 0)) {
+				ap->func_args(p, argv[optind+1], argv[optind+2]);
 				break;
+				
 			} else {
 #endif
-				
 				if (ap->function_with_argument)
 				{
 					if (optind + 1 >= argc)
@@ -898,7 +946,7 @@ int main(int argc, char *argv[])
 					ap->function(p);
 				}
 		
-#ifdef ENABLE_RENAME
+#ifdef ENABLE_RENAME_OR_CHANGE_DISKID
 			}
 #endif
 			wbfs_close(p);
@@ -906,7 +954,13 @@ int main(int argc, char *argv[])
 		}
 	}
 
-        exit(EXIT_SUCCESS);
+	if (command_found) {
+		exit(EXIT_SUCCESS);
+	}
+	else {
+		printf("Unknown command: %s\n", argv[optind]);
+		exit(EXIT_FAILURE);
+	}
 }
 
 #endif

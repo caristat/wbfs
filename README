@@ -9,4 +9,7 @@ enables modifications apparently used by "WBFS for MAc OS X", a GUI wrapper
 ENABLE_RENAME
 enable the rename functionality for non-win32 systems
 
+ENABLE_CHANGE_DISKID
+enable the id change functionality for non-win32 systems
+
 April 2009
