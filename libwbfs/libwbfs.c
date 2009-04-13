@@ -453,8 +453,8 @@ static u32 alloc_block(wbfs_t*p)
 }
 static void free_block(wbfs_t *p,int bl)
 {
-        int i = bl/(32);
-        int j = bl&31;
+        int i = (bl-1)/(32);
+        int j = (bl-1)&31;
         u32 v = wbfs_ntohl(p->freeblks[i]);
         p->freeblks[i] = wbfs_htonl(v | 1<<j);
 }
