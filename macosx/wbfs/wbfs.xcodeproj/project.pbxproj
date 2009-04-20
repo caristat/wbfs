@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D6638380F9C7BA500298B12 /* libwbfs_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D6638370F9C7BA500298B12 /* libwbfs_unix.c */; };
+		3D6638390F9C7BA500298B12 /* libwbfs_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D6638370F9C7BA500298B12 /* libwbfs_unix.c */; };
+		3D66383A0F9C7BA500298B12 /* libwbfs_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D6638370F9C7BA500298B12 /* libwbfs_unix.c */; };
 		3DBBF7A60F89071A00592CB6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */; };
 		3DBBF7DC0F8907E000592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
-		3DBBF7DD0F8907E000592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
-		3DBBF7DE0F8907E000592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
 		3DBBF7DF0F8907E000592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
 		3DBBF7E00F8907E000592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
 		3DBBF7E20F8907E000592CB6 /* disc_usage_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */; };
@@ -20,8 +21,6 @@
 		3DBBF7E70F8907E000592CB6 /* wbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7DB0F8907E000592CB6 /* wbfs.c */; };
 		3DBBF8180F8908DB00592CB6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */; };
 		3DBBF81D0F89092600592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
-		3DBBF81F0F89092600592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
-		3DBBF8200F89092600592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
 		3DBBF8210F89092600592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
 		3DBBF8220F89092600592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
 		3DBBF8240F89092600592CB6 /* disc_usage_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D40F8907E000592CB6 /* disc_usage_table.c */; };
@@ -30,8 +29,6 @@
 		3DBBF8270F89092600592CB6 /* tools.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D80F8907E000592CB6 /* tools.c */; };
 		3DBBF8280F89092600592CB6 /* bn.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D90F8907E000592CB6 /* bn.c */; };
 		3DBBF8330F89096E00592CB6 /* libwbfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CC0F8907E000592CB6 /* libwbfs.c */; };
-		3DBBF8340F89096E00592CB6 /* libwbfs_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */; };
-		3DBBF8350F89096E00592CB6 /* libwbfs_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */; };
 		3DBBF8360F89096E00592CB6 /* rijndael.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D00F8907E000592CB6 /* rijndael.c */; };
 		3DBBF8370F89096E00592CB6 /* wiidisc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D10F8907E000592CB6 /* wiidisc.c */; };
 		3DBBF8380F89096E00592CB6 /* scrub.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBF7D30F8907E000592CB6 /* scrub.c */; };
@@ -57,11 +54,10 @@
 /* Begin PBXFileReference section */
 		3D1916EC0F8B878100E97958 /* libwbfs_win32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_win32.c; sourceTree = "<group>"; };
 		3D1917220F8B99B100E97958 /* libwbfs_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libwbfs_os.h; path = ../../libwbfs_os.h; sourceTree = SOURCE_ROOT; };
+		3D6638370F9C7BA500298B12 /* libwbfs_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_unix.c; sourceTree = "<group>"; };
 		3DBBF7A50F89071A00592CB6 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		3DBBF7CC0F8907E000592CB6 /* libwbfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs.c; sourceTree = "<group>"; };
 		3DBBF7CD0F8907E000592CB6 /* libwbfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwbfs.h; sourceTree = "<group>"; };
-		3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_linux.c; sourceTree = "<group>"; };
-		3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwbfs_macosx.c; sourceTree = "<group>"; };
 		3DBBF7D00F8907E000592CB6 /* rijndael.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rijndael.c; sourceTree = "<group>"; };
 		3DBBF7D10F8907E000592CB6 /* wiidisc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wiidisc.c; sourceTree = "<group>"; };
 		3DBBF7D20F8907E000592CB6 /* wiidisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wiidisc.h; sourceTree = "<group>"; };
@@ -148,10 +144,9 @@
 		3DBBF7CB0F8907E000592CB6 /* libwbfs */ = {
 			isa = PBXGroup;
 			children = (
+				3D6638370F9C7BA500298B12 /* libwbfs_unix.c */,
 				3DBBF7CC0F8907E000592CB6 /* libwbfs.c */,
 				3DBBF7CD0F8907E000592CB6 /* libwbfs.h */,
-				3DBBF7CE0F8907E000592CB6 /* libwbfs_linux.c */,
-				3DBBF7CF0F8907E000592CB6 /* libwbfs_macosx.c */,
 				3D1916EC0F8B878100E97958 /* libwbfs_win32.c */,
 				3DBBF7D00F8907E000592CB6 /* rijndael.c */,
 				3DBBF7D10F8907E000592CB6 /* wiidisc.c */,
@@ -247,8 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DBBF81D0F89092600592CB6 /* libwbfs.c in Sources */,
-				3DBBF81F0F89092600592CB6 /* libwbfs_linux.c in Sources */,
-				3DBBF8200F89092600592CB6 /* libwbfs_macosx.c in Sources */,
 				3DBBF8210F89092600592CB6 /* rijndael.c in Sources */,
 				3DBBF8220F89092600592CB6 /* wiidisc.c in Sources */,
 				3DBBF8240F89092600592CB6 /* disc_usage_table.c in Sources */,
@@ -256,6 +249,7 @@
 				3DBBF8260F89092600592CB6 /* negentig.c in Sources */,
 				3DBBF8270F89092600592CB6 /* tools.c in Sources */,
 				3DBBF8280F89092600592CB6 /* bn.c in Sources */,
+				3D6638390F9C7BA500298B12 /* libwbfs_unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,8 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DBBF8330F89096E00592CB6 /* libwbfs.c in Sources */,
-				3DBBF8340F89096E00592CB6 /* libwbfs_linux.c in Sources */,
-				3DBBF8350F89096E00592CB6 /* libwbfs_macosx.c in Sources */,
 				3DBBF8360F89096E00592CB6 /* rijndael.c in Sources */,
 				3DBBF8370F89096E00592CB6 /* wiidisc.c in Sources */,
 				3DBBF8380F89096E00592CB6 /* scrub.c in Sources */,
@@ -273,6 +265,7 @@
 				3DBBF83A0F89096E00592CB6 /* ec.c in Sources */,
 				3DBBF83B0F89096E00592CB6 /* tools.c in Sources */,
 				3DBBF83C0F89096E00592CB6 /* bn.c in Sources */,
+				3D66383A0F9C7BA500298B12 /* libwbfs_unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,14 +275,13 @@
 			files = (
 				3DBBF7E70F8907E000592CB6 /* wbfs.c in Sources */,
 				3DBBF7DC0F8907E000592CB6 /* libwbfs.c in Sources */,
-				3DBBF7DD0F8907E000592CB6 /* libwbfs_linux.c in Sources */,
-				3DBBF7DE0F8907E000592CB6 /* libwbfs_macosx.c in Sources */,
 				3DBBF7DF0F8907E000592CB6 /* rijndael.c in Sources */,
 				3DBBF7E00F8907E000592CB6 /* wiidisc.c in Sources */,
 				3DBBF7E20F8907E000592CB6 /* disc_usage_table.c in Sources */,
 				3DBBF7E30F8907E000592CB6 /* ec.c in Sources */,
 				3DBBF7E50F8907E000592CB6 /* tools.c in Sources */,
 				3DBBF7E60F8907E000592CB6 /* bn.c in Sources */,
+				3D6638380F9C7BA500298B12 /* libwbfs_unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

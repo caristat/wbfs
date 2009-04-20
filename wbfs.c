@@ -11,28 +11,19 @@
 
 #ifdef WIN32
 #include "win32/xgetopt.h"
-#else
-#include <getopt.h>
-#endif
-
-#include <sys/stat.h>
-
-#ifdef WIN32
 #include <direct.h>
 #include <io.h>
+#define snprintf _snprintf
 #else
+#include <getopt.h>
 #include <unistd.h>
 #endif
-
-#ifdef WIN32
 #include <errno.h>
-#endif
+
+#include <sys/stat.h>
 #include "tools.h"
 #include "libwbfs.h"
 
-#ifdef WIN32
-#define snprintf _snprintf
-#endif
 
 #ifdef ENABLE_RENAME
 #ifndef ENABLE_RENAME_OR_CHANGE_DISKID
@@ -191,7 +182,7 @@ int wbfs_applet_ls(wbfs_t *p)
 					fprintf(stderr, "%c%c%c%c%c%c %4dM %s\n", b[0], b[1], b[2], b[3], b[4], b[5], (u32)(size * 4ULL / (MB)), b + 0x20);
 				}
 #else
-				fprintf(stderr, "%c%c%c%c%c%c|@|%s|@|%.2fG\n",b[0], b[1], b[2], b[3], b[4], b[5],
+				fprintf(stderr, "%c%c%c%c%c%c|@|%-40s|@|%.2fG\n",b[0], b[1], b[2], b[3], b[4], b[5],
 						b + 0x20,size*4ULL/(GB));
 #endif
 			}
@@ -202,6 +193,8 @@ int wbfs_applet_ls(wbfs_t *p)
 
 #ifdef WIN32
 	if(!shortcmd)
+#endif
+#ifndef __APPLE__
 	{
 		u32 blcount = wbfs_count_usedblocks(p);
 		fprintf(stderr, "------------\n Total: %.2fG, Used: %.2fG, Free: %.2fG\n",
@@ -210,7 +203,6 @@ int wbfs_applet_ls(wbfs_t *p)
 				(float)(blcount) * p->wbfs_sec_sz / GB);
 	}
 #endif
-
 #ifndef WIN32
 	return 0;
 #endif
@@ -372,7 +364,10 @@ void wbfs_applet_estimate(wbfs_t *p, BOOL shortcmd, int argc, char *argv[])
 	}
 }
 #endif
-
+int _wbfs_disc_read(void *fp, u32 lba, u32 count, void *iobuf)
+{
+	return wbfs_disc_read(fp, lba, iobuf, count);
+}
 static void _spinner(int x, int y){ spinner(x, y); }
 #ifdef WIN32
 static void _progress(int x, int y){ progress(x, y); }
@@ -419,21 +414,50 @@ int wbfs_applet_add(wbfs_t *p,char*argv)
 	}
 
 #else
-	if(!f)
-		wbfs_error("unable to open disc file");
-	else
-	{
-		fread(discinfo,6,1,f);
-		d = wbfs_open_disc(p,discinfo);
-		if(d)
-		{
-			discinfo[6]=0;
-			fprintf(stderr,"%s already in disc..\n",discinfo);
-			wbfs_close_disc(d);
-			return 0;
-		} else
-			return wbfs_add_disc(p,read_wii_file,f,_spinner,ONLY_GAME_PARTITION,0);
-	}
+        if(!f)
+                wbfs_error("unable to open disc file");
+        else
+        {
+                fread(discinfo,6,1,f);
+                if (memcmp(discinfo, "WBFS", 4) == 0) // add all games in the wbfs partition
+                {
+                        fclose(f);
+                        wbfs_t *src_p = wbfs_try_open_partition(argv, 0);
+                        if (!src_p)
+                        {
+                                wbfs_error("incorrect wbfs file");
+                                return 1;
+                        }
+                        int i, count = wbfs_count_discs(src_p);
+                        u8 *b = wbfs_ioalloc(0x100);
+                        if (count==0)
+                          wbfs_error("no disc in wbfs");
+                        for (i=0;i<count;i++)
+                        {
+                                if(!wbfs_get_disc_info(src_p, i, b, 0x100, NULL)){
+                                        d = wbfs_open_disc(p, b);
+                                        if(!d){ // not here already.
+                                                d = wbfs_open_disc(src_p, b);
+                                                wbfs_add_disc(p, _wbfs_disc_read, d, _spinner, ONLY_GAME_PARTITION, 0);
+                                        }
+                                        wbfs_close_disc(d);
+                                }
+                        }
+                        wbfs_close(src_p);
+                }
+                else
+                {
+                        d = wbfs_open_disc(p,discinfo);
+                        if(d)
+                        {
+                                discinfo[6]=0;
+                                fprintf(stderr,"%s already in disc..\n",discinfo);
+                                wbfs_close_disc(d);
+                                return 0;
+                        } else
+                                return wbfs_add_disc(p,read_wii_file,f,_spinner,ONLY_GAME_PARTITION,0);
+                }
+        }
 	return 1;
 #endif
 

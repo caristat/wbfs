@@ -172,7 +172,7 @@ static void do_data(u64 size)
 
 	fp = fopen("###dat###", "wb");
 	if (fp == 0)
-		fatal("cannot open partition output file");
+		fatal("Cannot open partition output file");
 
 	fprintf(stderr, "\nDumping partition contents...\n");
 	offset = 0;
