@@ -182,7 +182,7 @@ int wbfs_applet_ls(wbfs_t *p)
 					fprintf(stderr, "%c%c%c%c%c%c %4dM %s\n", b[0], b[1], b[2], b[3], b[4], b[5], (u32)(size * 4ULL / (MB)), b + 0x20);
 				}
 #else
-				fprintf(stderr, "%c%c%c%c%c%c|@|%-40s|@|%.2fG\n",b[0], b[1], b[2], b[3], b[4], b[5],
+				fprintf(stderr, "%c%c%c%c%c%c|@|%-55s|@|%.2fG\n",b[0], b[1], b[2], b[3], b[4], b[5],
 						b + 0x20,size*4ULL/(GB));
 #endif
 			}
@@ -197,7 +197,8 @@ int wbfs_applet_ls(wbfs_t *p)
 #ifndef __APPLE__
 	{
 		u32 blcount = wbfs_count_usedblocks(p);
-		fprintf(stderr, "------------\n Total: %.2fG, Used: %.2fG, Free: %.2fG\n",
+		fprintf(stderr, "------------\n %u Files - Total: %.2fG, Used: %.2fG, Free: %.2fG\n",
+				count,
 				(float)p->n_wbfs_sec * p->wbfs_sec_sz / GB, 
 				(float)(p->n_wbfs_sec-blcount) * p->wbfs_sec_sz / GB,
 				(float)(blcount) * p->wbfs_sec_sz / GB);
