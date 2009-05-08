@@ -199,7 +199,7 @@ int wbfs_applet_ls(wbfs_t *p)
 		u32 blcount = wbfs_count_usedblocks(p);
 		fprintf(stderr, "------------\n Total: %.2fG, Used: %.2fG, Free: %.2fG\n",
 				(float)p->n_wbfs_sec * p->wbfs_sec_sz / GB, 
-				(float)(p->n_wbfs_sec-count) * p->wbfs_sec_sz / GB,
+				(float)(p->n_wbfs_sec-blcount) * p->wbfs_sec_sz / GB,
 				(float)(blcount) * p->wbfs_sec_sz / GB);
 	}
 #endif
