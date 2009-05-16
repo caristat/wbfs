@@ -964,7 +964,10 @@ int main(int argc, char *argv[])
 					if (optind + 1 >= argc)
 						usage(argv);
 					else
-						ap->function_with_argument(p, argv[optind+1]);
+                                                while (optind + 1 < argc){
+                                                        ap->function_with_argument(p, argv[optind+1]);
+                                                        optind++;
+                                                }
 				}
 				else 
 				{
