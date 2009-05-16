@@ -392,7 +392,6 @@ void fatal(const char *s, ...)
 	exit(1);
 }
 
-#ifdef WIN32
 void non_fatal(const char *s, ...)
 {
 	va_list ap;
@@ -402,7 +401,6 @@ void non_fatal(const char *s, ...)
 	fprintf(stderr, "\n");
 	va_end(ap);
 }
-#endif
 
 //
 // output formatting

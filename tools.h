@@ -54,9 +54,7 @@ void do_yaz0(u8 *in, u32 in_size, u8 *out, u32 out_size);
 
 // error handling
 void fatal(const char *s, ...);
-#ifdef WIN32
 void non_fatal(const char *s, ...);
-#endif
 
 // output formatting
 void print_bytes(u8 *x, u32 n);

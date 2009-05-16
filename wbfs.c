@@ -367,7 +367,21 @@ void wbfs_applet_estimate(wbfs_t *p, BOOL shortcmd, int argc, char *argv[])
 #endif
 int _wbfs_disc_read(void *fp, u32 lba, u32 count, void *iobuf)
 {
-	return wbfs_disc_read(fp, lba, iobuf, count);
+        int ret = wbfs_disc_read(fp, lba, iobuf, count);
+        static int num_fail=0;
+        if (ret)
+        {
+                if(num_fail==0)
+                        wbfs_error("error reading lba probably the two wbfs don't have the same granularity. Ignoring...\n");
+                if(num_fail++ > 0x100)
+                {
+                        wbfs_fatal( "too many error giving up...\n");
+                        return 1;
+                }
+        }
+        else
+                num_fail = 0;
+	return 0;
 }
 static void _spinner(int x, int y){ spinner(x, y); }
 #ifdef WIN32
@@ -416,7 +430,7 @@ int wbfs_applet_add(wbfs_t *p,char*argv)
 
 #else
         if(!f)
-                wbfs_error("unable to open disc file");
+                wbfs_fatal("unable to open disc file");
         else
         {
                 fread(discinfo,6,1,f);
@@ -426,13 +440,13 @@ int wbfs_applet_add(wbfs_t *p,char*argv)
                         wbfs_t *src_p = wbfs_try_open_partition(argv, 0);
                         if (!src_p)
                         {
-                                wbfs_error("incorrect wbfs file");
+                                wbfs_fatal("incorrect wbfs file");
                                 return 1;
                         }
                         int i, count = wbfs_count_discs(src_p);
                         u8 *b = wbfs_ioalloc(0x100);
                         if (count==0)
-                          wbfs_error("no disc in wbfs");
+                          wbfs_fatal("no disc in wbfs");
                         for (i=0;i<count;i++)
                         {
                                 if(!wbfs_get_disc_info(src_p, i, b, 0x100, NULL)){

@@ -572,7 +572,8 @@ u32 wbfs_add_disc
 				ERROR("no space left on device (disc full)");
 			}
 
-			read_src_wii_disc(callback_data, i * (p->wbfs_sec_sz >> 2), p->wbfs_sec_sz, copy_buffer);
+			if(read_src_wii_disc(callback_data, i * (p->wbfs_sec_sz >> 2), p->wbfs_sec_sz, copy_buffer))
+                                ERROR("error reading disc");
 
 			// fix the partition table.
 			if (i == (0x40000 >> p->wbfs_sec_sz_s))
@@ -583,20 +584,11 @@ u32 wbfs_add_disc
 			p->write_hdsector(p->callback_data, p->part_lba + bl * (p->wbfs_sec_sz / p->hd_sec_sz),
 								p->wbfs_sec_sz / p->hd_sec_sz, copy_buffer);
 			
-#ifdef WIN32
 			if (spinner)
 			{
 				cur++;
 				spinner(cur, tot);
 			}
-#else
-			// FIX ME: while merging I was not sure whether we have to increment cur inside or outside of the if statement, g3power
-			cur++;
-			if (spinner)
-			{
-				spinner(cur, tot);
-			}
-#endif
 		}
 
 		info->wlba_table[i] = wbfs_htons(bl);
