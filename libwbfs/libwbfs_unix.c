@@ -1,10 +1,12 @@
-#if defined( __linux__) || defined(__APPLE__)
+#if defined( __linux__) || defined(__APPLE__) || defined(__CYGWIN__)
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef __linux__
+#if defined(__linux__)
 #include <linux/fs.h>
+#elif defined(__CYGWIN__)
+#include <cygwin/fs.h>
 #else
 #include <sys/disk.h>
 #endif
@@ -55,7 +57,7 @@ static int get_capacity(char *file,u32 *sector_size,u32 *n_sector)
 	if(fd<0){
 		return 0;
 	}
-#ifdef __linux__
+#if defined(__linux__) || defined(__CYGWIN__)
 	ret = ioctl(fd,BLKSSZGET,sector_size);
 #else //__APPLE__
 	ret = ioctl(fd,DKIOCGETBLOCKSIZE,sector_size);
@@ -71,7 +73,7 @@ static int get_capacity(char *file,u32 *sector_size,u32 *n_sector)
 		fclose(f);
 		return 1;
 	}
-#ifdef __linux__
+#if defined(__linux__) || defined(__CYGWIN__)
 	ret = ioctl(fd,BLKGETSIZE,n_sector);
 #else //__APPLE__
 	long long my_n_sector;
@@ -117,7 +119,7 @@ wbfs_t *wbfs_try_open(char *disc,char *partition, int reset)
 	else if(!p && !reset){
 		char buffer[32];
 		int i;
-#ifdef __linux__
+#if defined(__linux__) || defined(__CYGWIN__)
 		for (i='b';i<'z';i++)
 		{
 			snprintf(buffer,32,"/dev/sd%c",i);
